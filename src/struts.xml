@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />	
+	<constant name="struts.multipart.maxSize" value="2048000000"/>
+	<package name="default" extends="struts-default,json-default" namespace="/">
+	    <interceptors>
+			<interceptor name="myInterceptor" class="intercepts.myInterceptor"></interceptor>
+			<interceptor-stack name="defaultInterceptorStack">
+				<interceptor-ref name="myInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>  
+		
+		<default-action-ref name="index"></default-action-ref> 
+		
+		<global-results>
+			<result name="error">jsp/error.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+		
+		<action name="index">
+			<result>index.jsp</result>
+		</action>
+	    
+	    <action name="student!*" class="actions.StudentAction" method="{1}">
+	        <interceptor-ref name="defaultInterceptorStack" />
+			<result name="success">jsp/add_success.jsp</result>
+			<result name="searchdetailsuccess">jsp/result.jsp</result>
+			<result name="searchsuccess">jsp/searchsuccess.jsp</result>
+			<result name="deletesuccess">jsp/deletesuccess.jsp</result> 
+			<result name="updatesuccess">jsp/updatesuccess.jsp</result> 
+		</action> 
+		<action name="test" class="actions.MyAction" method="test">
+	        <result>mode.jsp</result> 
+		</action> 
+		
+	</package>
+</struts>

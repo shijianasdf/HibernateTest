@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cancer>
+BLCA,BRCA,CESC,COAD,GBM,OV,PRAD,HNSC,READ
+</cancer>
